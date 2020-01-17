@@ -2,9 +2,9 @@ server:
   port: 8002
 spring:
   rabbitmq:
-    addresses: f0t1.top:5672
+    addresses: localhost:5672
     username: guest
-    password: zhou1990
+    password: guest
     virtual-host: /
     connection-timeout: 15s
     listener:
@@ -13,9 +13,9 @@ spring:
         concurrency: 5
 
   redis:
-    host: f0t1.top
+    host: localhost
     port: 6379
-    password: zhou@1990
+    password:
     database: 0
     timeout: 0ms
     jedis:
