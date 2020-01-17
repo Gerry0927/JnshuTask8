@@ -1,0 +1,88 @@
+#开启 SpringBoot 的 debug
+#debug: true
+spring:
+  redis:
+    host: 192.168.0.108
+    port: 6379
+    password:
+    database: 0
+    timeout: 0ms
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: -1ms
+  datasource:
+    url: jdbc:mysql://localhost:3306/gerry?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+  mvc:
+    throw-exception-if-no-handler-found: true
+#    static-path-pattern: /static
+  resources:
+    add-mappings: false
+
+  rabbitmq:
+    addresses: localhost:5672
+    username: guest
+    password: guest
+    virtual-host: /
+    connection-timeout: 15s
+    listener:
+      simple:
+        acknowledge-mode: manual
+        concurrency: 5
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.gerry.jnshu.pojo
+
+token:
+  header: Authorization
+  secret: abcdefghijklmnopqrstuvwxyz
+  expireTime: 30
+
+storage:
+  # 配置两种模式（本地、阿里云）分别是 local、aliyun
+  active: aliyun
+  aliyun:
+    endpoint: oss-cn-hangzhou.aliyuncs.com
+    accessKeyId: 11111
+    accessKeySecret: 11111
+    bucketName: jnshu
+  local:
+    storagePath: storage
+    address: http://localhost:8080/storage
+
+
+aliyun:
+  smssdk:
+    product: Dysmsapi
+    domain: dysmsapi.aliyuncs.com
+    accessKeyId: LTAI4FvNF4k2KFUNZV8F6ih1
+    accessKeySecret: IXhk77Y4oHAWk0951Wl79EtUGWYMV2
+    signName: IT修真院
+    templateCode: SMS_175240801
+    defaultConnectTimeout: 10000
+    defaultReadTimeout: 10000
+    expireTime: 5
+  emailsdk:
+   accountName: jnshu
+   fromAlias: IT修真院
+   tagName: jnshu
+
+logging:
+  level:
+    root: info
+    org.springframework.web: trace
+    com.gerry.jnshu: info
+  path: spring/log
+
