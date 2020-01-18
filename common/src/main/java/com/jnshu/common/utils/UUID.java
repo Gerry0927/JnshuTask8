@@ -1,5 +1,6 @@
 package com.jnshu.common.utils;
 
+
 import com.sun.xml.internal.ws.util.UtilException;
 
 import java.security.MessageDigest;

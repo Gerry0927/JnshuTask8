@@ -11,7 +11,15 @@ public class RmiClient {
     @Bean(name = "smsCodeSendService")
     public RmiProxyFactoryBean getUserService() {
         RmiProxyFactoryBean rmiProxyFactoryBean = new RmiProxyFactoryBean();
-        rmiProxyFactoryBean.setServiceUrl("rmi://127.0.0.1:2002/smsCodeSendService");
+        rmiProxyFactoryBean.setServiceUrl("rmi://f0t1.top:2002/smsCodeSendService");
+        rmiProxyFactoryBean.setServiceInterface(SmsCodeSendService.class);
+        return rmiProxyFactoryBean;
+    }
+
+    @Bean(name = "smsCodeSendService2")
+    public RmiProxyFactoryBean getUserService2() {
+        RmiProxyFactoryBean rmiProxyFactoryBean = new RmiProxyFactoryBean();
+        rmiProxyFactoryBean.setServiceUrl("rmi://f0t1.top:2003/smsCodeSendService");
         rmiProxyFactoryBean.setServiceInterface(SmsCodeSendService.class);
         return rmiProxyFactoryBean;
     }

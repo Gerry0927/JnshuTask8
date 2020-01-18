@@ -34,6 +34,9 @@ public class AuthServiceImpl implements AuthService {
     @Resource
     private SmsCodeSendService smsCodeSendService;
 
+    @Resource
+    private SmsCodeSendService smsCodeSendService2;
+
     private RedisCache redisCache;
 
 
@@ -80,6 +83,27 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public SmsInfo sendSMSCode(String phone) {
+        int flag = Math.random()>0.5? 1:0;
+        try {
+            switch(flag){
+                case 1:
+                    smsCodeSendService.sendSMSLoginCode(phone);
+                     break;
+                default:
+                     smsCodeSendService2.sendSMSLoginCode(phone);
+                     break;
+            }
+
+        }catch(Exception e){
+            switch(flag){
+                case 1:
+                    smsCodeSendService2.sendSMSLoginCode(phone);
+                    break;
+                default:
+                    smsCodeSendService.sendSMSLoginCode(phone);
+                    break;
+            }
+        }
         return smsCodeSendService.sendSMSLoginCode(phone);
     }
 
