@@ -8,7 +8,7 @@
        http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
 
     <!-- 服务消费者引用服务配置 -->
-    <dubbo:reference id="userService1" interface="com.gerry.dubbo.api.UserRpcService"
+    <dubbo:reference id="smsCodeSendService" interface="com.jnshu.common.service.SmsCodeSendService"
                      version="${dubbo.consumer.UserRpcService.version}"
                      validation="true" />
 

@@ -11,6 +11,7 @@ import com.jnshu.common.pojo.SmsInfo;
 import com.gerry.task.pojo.UserInfo;
 import com.jnshu.common.redis.RedisCache;
 import com.jnshu.common.service.SmsCodeSendService;
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -34,10 +35,10 @@ public class AuthServiceImpl implements AuthService {
     @Resource
     private SmsCodeSendService smsCodeSendService;
 
-    @Resource
-    private SmsCodeSendService smsCodeSendService2;
-
-    private RedisCache redisCache;
+    @Override
+    public SmsInfo sendSMSCode(String phone) {
+        return smsCodeSendService.sendSMSLoginCode(phone);
+    }
 
 
     @Override
@@ -81,31 +82,6 @@ public class AuthServiceImpl implements AuthService {
         return userInfo.getUserId();
     }
 
-    @Override
-    public SmsInfo sendSMSCode(String phone) {
-        int flag = Math.random()>0.5? 1:0;
-        try {
-            switch(flag){
-                case 1:
-                    smsCodeSendService.sendSMSLoginCode(phone);
-                     break;
-                default:
-                     smsCodeSendService2.sendSMSLoginCode(phone);
-                     break;
-            }
-
-        }catch(Exception e){
-            switch(flag){
-                case 1:
-                    smsCodeSendService2.sendSMSLoginCode(phone);
-                    break;
-                default:
-                    smsCodeSendService.sendSMSLoginCode(phone);
-                    break;
-            }
-        }
-        return smsCodeSendService.sendSMSLoginCode(phone);
-    }
 
 
 }

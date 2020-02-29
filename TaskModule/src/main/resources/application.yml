@@ -33,6 +33,16 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.gerry.task.pojo
 
+dubbo:
+  application:
+    name: service-consumer
+  registry:
+    address: zookeeper://localhost:2181
+  consumer:
+    timeout: 1000
+    UserRpcService:
+      version: 1.0.0
+
 token:
   header: Authorization
   secret: abcdefghijklmnopqrstuvwxyz
