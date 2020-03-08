@@ -1,5 +1,6 @@
 package com.gerry.task.core.config;
 
+import org.hibernate.validator.HibernateValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.validation.Validation;
 import javax.validation.Validator;
 import java.util.Collections;
 
@@ -69,7 +71,19 @@ public class SpringMVCConfiguration implements WebMvcConfigurer {
     public MethodValidationPostProcessor mvcMethodValidationPostProcessor() {
         MethodValidationPostProcessor methodValidationPostProcessor = new MethodValidationPostProcessor();
         methodValidationPostProcessor.setValidator(validator);
+//        methodValidationPostProcessor.setValidator(validator());
         return methodValidationPostProcessor;
     }
+
+//    @Bean
+//    public static Validator validator() {
+//        return Validation
+//                .byProvider(HibernateValidator.class)
+//                .configure()
+//                //快速返回模式，有一个验证失败立即返回错误信息
+//                .failFast(true)
+//                .buildValidatorFactory()
+//                .getValidator();
+//    }
 
 }
